@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
-// import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
-
 // import MuiThemeProvider from 'material-ui-old/styles/MuiThemeProvider';
 import DrawerTest from "./App/components/DrawerTest.js";
 import 'normalize.css';
+import ResponsiveDrawer from "./App/components/ResponsiveDrawer";
 
 //=======================================
 let flag = false;
@@ -82,6 +79,7 @@ class App extends React.Component {
       <div>
         {/*<MuiThemeProvider>*/}
         <DrawerTest/>
+        {/*<ResponsiveDrawer/>*/}
         {/*</MuiThemeProvider>*/}
       </div>
     );

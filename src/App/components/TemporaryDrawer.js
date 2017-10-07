@@ -2,12 +2,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import {withStyles} from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import Button from 'material-ui/Button';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import { mailFolderListItems, otherMailFolderListItems } from './tileData';
+import {mailFolderListItems, otherMailFolderListItems} from './tileData';
 
 const styles = {
   list: {
@@ -28,12 +28,13 @@ class TemporaryDrawer extends React.Component {
       bottom: false,
       right: false,
     },
+    tmp: false,
   };
 
   toggleDrawer = (side, open) => {
     const drawerState = {};
     drawerState[side] = open;
-    this.setState({ open: drawerState });
+    this.setState({open: drawerState});
   };
 
   handleTopOpen = () => {
@@ -45,11 +46,17 @@ class TemporaryDrawer extends React.Component {
   };
 
   handleLeftOpen = () => {
-    this.toggleDrawer('left', true);
+    // this.toggleDrawer('left', true);
+    this.setState({
+      tmp: true
+    })
   };
 
   handleLeftClose = () => {
-    this.toggleDrawer('left', false);
+    // this.toggleDrawer('left', false);
+    this.setState({
+      tmp: false
+    })
   };
 
   handleBottomOpen = () => {
@@ -74,7 +81,7 @@ class TemporaryDrawer extends React.Component {
     const sideList = (
       <div>
         <List className={classes.list}>{mailFolderListItems}</List>
-        <Divider />
+        <Divider/>
         <List className={classes.list}>{otherMailFolderListItems}</List>
       </div>
     );
@@ -82,7 +89,7 @@ class TemporaryDrawer extends React.Component {
     const fullList = (
       <div>
         <List className={classes.listFull}>{mailFolderListItems}</List>
-        <Divider />
+        <Divider/>
         <List className={classes.listFull}>{otherMailFolderListItems}</List>
       </div>
     );
@@ -94,11 +101,15 @@ class TemporaryDrawer extends React.Component {
         <Button onClick={this.handleTopOpen}>Open Top</Button>
         <Button onClick={this.handleBottomOpen}>Open Bottom</Button>
         <Drawer
-          open={this.state.open.left}
+          open={this.state.tmp}
           onRequestClose={this.handleLeftClose}
           onClick={this.handleLeftClose}
         >
-          {sideList}
+          <div>
+            <List className={classes.list}>{mailFolderListItems}</List>
+            <Divider/>
+            <List className={classes.list}>{otherMailFolderListItems}</List>
+          </div>
         </Drawer>
         <Drawer
           anchor="top"
@@ -106,7 +117,11 @@ class TemporaryDrawer extends React.Component {
           onRequestClose={this.handleTopClose}
           onClick={this.handleTopClose}
         >
-          {fullList}
+          <div>
+            <List className={classes.list}>{mailFolderListItems}</List>
+            <Divider/>
+            <List className={classes.list}>{otherMailFolderListItems}</List>
+          </div>
         </Drawer>
         <Drawer
           anchor="bottom"

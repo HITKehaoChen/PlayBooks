@@ -1,19 +1,25 @@
+/* eslint-disable flowtype/require-valid-file-annotation */
+
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from 'material-ui/styles';
-import classNames from 'classnames';
+import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import List from 'material-ui/List';
 import Typography from 'material-ui/Typography';
-import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
+import Hidden from 'material-ui/Hidden';
+import Divider from 'material-ui/Divider';
 import MenuIcon from 'material-ui-icons/Menu';
+import { mailFolderListItems, otherMailFolderListItems } from './tileData';
+
+
+
+import classNames from 'classnames';
 import AddIcon from 'material-ui-icons/Add';
 import SearchIcon from 'material-ui-icons/Search'
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
-import {mailFolderListItems, otherMailFolderListItems} from './tileData';
 import FullWidthGrid from "./FullWidthGrid";
 import SimpleCard from "./SimpleCard";
 import SimpleList from './SimpleList'
@@ -25,6 +31,8 @@ import EnhancedTable from "./EnhancedTable";
 import Paper from "material-ui/Paper";
 // import DatePicker from "material-ui-old/DatePicker";
 import AddBookDialog from "./AddBookDialog";
+
+
 
 const drawerWidth = 240;
 
@@ -45,102 +53,50 @@ const styles = theme => ({
   },
   appBar: {
     position: 'fixed',
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    paddingRight: '0 !important'
-  },
-  appBarShift: {
     marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
-  searchButton: {
-    marginRight: 12,
-    marginLeft: 20,
+  navIconHide: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
   },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 20,
-  },
-  hide: {
-    display: 'none',
-  },
+  drawerHeader: theme.mixins.toolbar,
   drawerPaper: {
-    position: 'fixed',
-    height: '100%',
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
+    width: 250,
+    [theme.breakpoints.up('md')]: {
+      width: drawerWidth,
+      position: 'relative',
+      height: '100%',
+    },
   },
   content: {
-    width: '-webkit-fill-available',
-    // marginLeft: -drawerWidth,
-    marginLeft: 0,
-    flexGrow: 1,
     backgroundColor: theme.palette.background.default,
+    width: '100%',
     padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
     height: 'calc(100% - 56px)',
     marginTop: 56,
     [theme.breakpoints.up('sm')]: {
-      content: {
-        height: 'calc(100% - 64px)',
-        marginTop: 64,
-      },
+      height: 'calc(100% - 64px)',
+      marginTop: 64,
     },
   },
   mainContent: {
     maxWidth: '1080px',
     margin: '0 auto'
   },
-  contentShift: {
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  title: {
-    flex: 1,
-    fontWeight: 'normal'
-  },
-  list: {
-    width: 250,
-    flex: 'initial',
-  },
 });
 
-class PersistentDrawer extends React.Component {
-
+class ResponsiveDrawer extends React.Component {
   state = {
-    open: false,
-    dialogOpen: false,
-    tmpOpen: false,
+    mobileOpen: false,
   };
 
-  handleTmpOpen = () => {
-    this.setState({tmpOpen: true})
-  }
-  handleTmpClose = () => {
-    this.setState({tmpOpen: false},()=>{
-      console.log(this.state.tmpOpen);
-    })
-    console.log('done for closing');
-  }
-
+  handleDrawerToggle = () => {
+    this.setState({ mobileOpen: !this.state.mobileOpen });
+  };
   handleDialogOpen = () => {
     this.setState({dialogOpen: true})
   };
@@ -149,80 +105,64 @@ class PersistentDrawer extends React.Component {
     this.setState({dialogOpen: false})
   };
 
-  handleDrawerOpen = () => {
-    this.setState({open: true});
-  };
-
-  handleDrawerClose = () => {
-    this.setState({open: false});
-  };
-
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
+
+    const drawer = (
+      <div>
+        <div className={classes.drawerHeader} />
+        <Divider />
+        <List>{mailFolderListItems}</List>
+        <Divider />
+        <List>{otherMailFolderListItems}</List>
+      </div>
+    );
 
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <AppBar className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
-            <Toolbar disableGutters={!this.state.open}>
+          <AppBar className={classes.appBar}>
+            <Toolbar>
               <IconButton
                 color="contrast"
                 aria-label="open drawer"
-                // onClick={this.handleDrawerOpen}
-                onClick={this.handleTmpOpen}
-                className={classNames(classes.menuButton, this.state.open && classes.hide)}
+                onClick={this.handleDrawerToggle}
+                className={classes.navIconHide}
               >
-                <MenuIcon/>
+                <MenuIcon />
               </IconButton>
-              {/*<MyTmpDrawer*/}
-              {/*onClick={this.handleTmpOpen}*/}
-              {/*onRequestClose={this.handleTmpClose}*/}
-
-              {/*/>*/}
-
-              <Typography type="title" color="inherit" className={classes.title} noWrap>
-                Play Some Books In a Elegant Way!
+              <Typography type="title" color="inherit" noWrap>
+                Responsive drawer
               </Typography>
-
-
-              <IconButton color="contrast" className={classes.searchButton}>
-                <SearchIcon/>
-              </IconButton>
             </Toolbar>
           </AppBar>
-
-          <Drawer
-            open={this.state.tmpOpen}
-            onRequestClose={this.handleTmpClose}
-            onClick={this.handleTmpClose}
-          >
-            <div>
-              <List className={classes.list}>{mailFolderListItems}</List>
-              <Divider/>
-              <List className={classes.list}>{otherMailFolderListItems}</List>
-            </div>
-          </Drawer>
-
-          {/*<Drawer*/}
-          {/*type="persistent"*/}
-          {/*classes={{*/}
-          {/*paper: classes.drawerPaper,*/}
-          {/*}}*/}
-          {/*open={this.state.open}*/}
-          {/*>*/}
-          {/*<div className={classes.drawerInner}>*/}
-          {/*<div className={classes.drawerHeader}>*/}
-          {/*<IconButton onClick={this.handleDrawerClose}>*/}
-          {/*<ChevronLeftIcon/>*/}
-          {/*</IconButton>*/}
-          {/*</div>*/}
-          {/*<Divider/>*/}
-          {/*<List className={classes.list}>{mailFolderListItems}</List>*/}
-          {/*<Divider/>*/}
-          {/*<List className={classes.list}>{otherMailFolderListItems}</List>*/}
-          {/*</div>*/}
-          {/*</Drawer>*/}
-          <main className={classNames(classes.content, this.state.open && classes.contentShift)}>
+          <Hidden mdUp>
+            <Drawer
+              type="temporary"
+              open={this.state.mobileOpen}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              onRequestClose={this.handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden mdDown implementation="css">
+            <Drawer
+              type="permanent"
+              open
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <main className={classes.content}>
             <div className={classes.mainContent}>
               {/*<Typography type="body1">*/}
               {'You think water moves fast? You should see ice.'}
@@ -326,30 +266,29 @@ class PersistentDrawer extends React.Component {
                 handleRequestClose={this.handleDialogClose}
               />
             </div>
+            <Button
+              fab
+              color="accent"
+              aria-label="add"
+              style={{
+                position: 'fixed',
+                bottom: 24,
+                right: 24
+              }}
+              onClick={this.handleDialogOpen}
+            >
+              <AddIcon/>
+            </Button>
+
           </main>
         </div>
-        <Button
-          fab
-          color="accent"
-          aria-label="add"
-          style={{
-            position: 'fixed',
-            bottom: 24,
-            right: 24
-          }}
-          onClick={this.handleDialogOpen}
-        >
-          <AddIcon/>
-        </Button>
-
-
       </div>
     );
   }
 }
 
-PersistentDrawer.propTypes = {
+ResponsiveDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PersistentDrawer);
+export default withStyles(styles)(ResponsiveDrawer);

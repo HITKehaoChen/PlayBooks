@@ -27,7 +27,6 @@
     "redux-form": "^7.1.0",
     "redux-form-material-ui": "^4.3.0",
     "style-loader": "^0.18.2",
-    "typeface-noto-sans": "0.0.35",
     "typeface-roboto": "0.0.35",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0"
