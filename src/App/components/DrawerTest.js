@@ -115,7 +115,8 @@ const styles = theme => ({
   },
   title: {
     flex: 1,
-    fontWeight: 'normal'
+    fontWeight: 'normal',
+    lineHeight: 1.15
   },
   list: {
     width: 250,
@@ -135,10 +136,7 @@ class PersistentDrawer extends React.Component {
     this.setState({tmpOpen: true})
   }
   handleTmpClose = () => {
-    this.setState({tmpOpen: false},()=>{
-      console.log(this.state.tmpOpen);
-    })
-    console.log('done for closing');
+    this.setState({tmpOpen: false})
   }
 
   handleDialogOpen = () => {
@@ -174,12 +172,6 @@ class PersistentDrawer extends React.Component {
               >
                 <MenuIcon/>
               </IconButton>
-              {/*<MyTmpDrawer*/}
-              {/*onClick={this.handleTmpOpen}*/}
-              {/*onRequestClose={this.handleTmpClose}*/}
-
-              {/*/>*/}
-
               <Typography type="title" color="inherit" className={classes.title} noWrap>
                 Play Some Books In a Elegant Way!
               </Typography>
