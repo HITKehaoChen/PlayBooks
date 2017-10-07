@@ -195,11 +195,9 @@ class SimpleList extends React.Component {
         const end = new Date() - start;
 
 
+
         // setTimeout(() => {
         //
-        this.setState({
-          isSearching: false,
-        });
 
         // 下次加钱的优化(
 
@@ -217,6 +215,9 @@ class SimpleList extends React.Component {
             bookArr: booksInfo,
             authorInfo: authorInfo
           }, () => {
+            this.setState({
+              isSearching: false,
+            });
             console.log(' book arr: ', this.state.bookArr);
             console.log(' author Info: ', this.state.authorInfo);
           })

@@ -18,7 +18,7 @@ export default class ShowList extends React.Component {
   render() {
 
     const bookArr = this.props.bookArr;
-    console.log('showlist-authorName: ', this.props.authorName);
+    // console.log('showlist-authorName: ', this.props.authorName);
     // console.log('bookArr: ', bookArr);
     // console.log('bookArr: ',Array.isArray(bookArr));
     if (Array.isArray(bookArr) && bookArr.length > 0) {

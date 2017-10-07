@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 // import MuiThemeProvider from 'material-ui-old/styles/MuiThemeProvider';
 import DrawerTest from "./components/DrawerTest";
 import 'normalize.css';
+import 'typeface-roboto';
+
 
 //=======================================
 let flag = false;
