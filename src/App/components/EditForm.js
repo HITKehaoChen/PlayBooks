@@ -269,7 +269,7 @@ class EditForm extends React.Component {
 
 
   validateEmpty = (el) => {
-    return new RegExp(/^$|\\s+/, 'i').test(el);
+    return new RegExp('^$|^\\s+$', 'i').test(el);
   };
 
   // validateISBN = () => {

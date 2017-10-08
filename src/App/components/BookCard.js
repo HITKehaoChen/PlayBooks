@@ -29,7 +29,7 @@ import PublisherIcon from 'material-ui-icons/Business';
 import PriceIcon from 'material-ui-icons/AttachMoney'
 import PersonIcon from 'material-ui-icons/Person';
 import PublicIcon from 'material-ui-icons/Public';
-import bgImg from '../static/images/cards/unnamed.webp';
+import bgImg from '../static/images/cards/unnamed.jpg';
 
 const styles = theme => ({
   root: {

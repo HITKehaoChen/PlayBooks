@@ -69,16 +69,25 @@ class SimpleList extends React.Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }, () => {
-      this.handleClick(e);
-      console.log('cb: ', this.state.authorName);
+      const EmptyRe = new RegExp('^$|^\\s+$', 'i');
+      if (!EmptyRe.test(this.state.authorName)) {
+        this.setState({
+          bookArr: [], authorInfo: [],
+          isSearching: true,
+        });
+        this.handleClick(e);
+        console.log('[SIMPLELIST]: this.state.authorName: ', this.state.authorName);
+      } else {
+        this.setState({
+          bookArr: [], authorInfo: [],
+          isSearching: false,
+        });
+      }
 
     });
 
-    console.log('e.target.name: ', e.target.name);
-    console.log('e.target.value: ', e.target.value);
-    console.log('this.state.authorName: ', this.state.authorName);
     // this.handleClick(e);
 
   };
@@ -96,7 +105,6 @@ class SimpleList extends React.Component {
     console.log('BAK OBJ', JSON.stringify(book));
     this.setState({
       undoObj: bak,
-
     }, () => {
       console.log('undo obj in handle deleted method: ', this.state.undoObj);
     });
@@ -183,10 +191,6 @@ class SimpleList extends React.Component {
     // let booksInfo = null;
     // let authorInfo = null;
 
-    this.setState({
-      isSearching: true
-    });
-    console.log('searching.........');
     const start = new Date();
 
     Axios
@@ -202,7 +206,7 @@ class SimpleList extends React.Component {
         // 下次加钱的优化(
 
 
-        console.log('searching done with ' + end + 'ms');
+        console.log('[SHOWLIST]: searching done with ' + end + 'ms');
 
         const {booksInfo, authorInfo} = res.data;
         if (Array.isArray(booksInfo)) {
@@ -213,16 +217,16 @@ class SimpleList extends React.Component {
 
           this.setState({
             bookArr: booksInfo,
-            authorInfo: authorInfo
+            authorInfo: authorInfo,
+            isSearching: false,
           }, () => {
-            this.setState({
-              isSearching: false,
-            });
+            console.log('isSearching: ', this.state.isSearching);
             console.log(' book arr: ', this.state.bookArr);
             console.log(' author Info: ', this.state.authorInfo);
           })
         } else {
-          this.setState({bookArr: [], authorInfo: []})
+          // didn't find
+          this.setState({bookArr: [], authorInfo: [], isSearching: false})
         }
         // }, 0)
       })
@@ -239,12 +243,16 @@ class SimpleList extends React.Component {
     // e.preventDefault();
     console.log('list state:', this.state);
     // only when nor '' or '\\s+', fetch data
-    const EmptyRe = new RegExp('^$|\\s+', 'i');
+    const EmptyRe = new RegExp('^$|^\\s+$', 'i');
+
+
+
+
     if (!EmptyRe.test(this.state.authorName)) {
-      console.log('valid name: ',this.state.authorName);
+      console.log('valid name: ', this.state.authorName);
       this.getBooksByAuthorName(this.state.authorName);
-    }else {
-      console.log('invalid name: ',this.state.authorName);
+    } else {
+      console.log('invalid name: ', this.state.authorName);
     }
     // let data = null;
     // Axios
@@ -349,7 +357,7 @@ class SimpleList extends React.Component {
               margin="normal"
               onKeyDown={(ev) => {
                 if (ev.key === 'Enter') {
-                  console.log(ev.target);
+                  // console.log(ev.target);
                   ev.preventDefault();
                   this.handleClick(ev);
                 }
@@ -389,8 +397,8 @@ class SimpleList extends React.Component {
           authorInfo={
             this.state.authorInfo
               .filter(author => {
-                  console.log('Filter bookArr: ', this.state.bookArr);
-                  console.log('Filter index: ', this.state.curIndex);
+                  // console.log('Filter bookArr: ', this.state.bookArr);
+                  // console.log('Filter index: ', this.state.curIndex);
                   if (this.state.bookArr[this.state.curIndex]) {
 
                     if (author.AuthorID === this.state.bookArr[this.state.curIndex].AuthorID) {

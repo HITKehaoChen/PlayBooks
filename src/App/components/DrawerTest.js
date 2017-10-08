@@ -217,20 +217,22 @@ class PersistentDrawer extends React.Component {
           <main className={classNames(classes.content, this.state.open && classes.contentShift)}>
             <div className={classes.mainContent}>
               {/*<Typography type="body1">*/}
-              {'You think water moves fast? You should see ice.'}
-              <FullWidthGrid/>
+              {/*<FullWidthGrid/>*/}
               <Grid container spacing={24}>
+                <Grid item xs={12}>
+                  {'You think water moves fast? You should see ice.'}
+                </Grid>
                 <Grid item xs={12}>
                   <Paper>
                     <SimpleList/>
                   </Paper>
                 </Grid>
-                <Grid item xs={12}>
-                  <TemporaryDrawer/>
-                </Grid>
-                <Grid item xs={12}>
-                  <EnhancedTable/>
-                </Grid>
+                {/*<Grid item xs={12}>*/}
+                {/*<TemporaryDrawer/>*/}
+                {/*</Grid>*/}
+                {/*<Grid item xs={12}>*/}
+                {/*<EnhancedTable/>*/}
+                {/*</Grid>*/}
                 {/*<Grid item xs={12}>*/}
                 {/*<DatePicker hintText="Portrait Dialog"/></Grid>*/}
                 <Grid item lg={3} sm={6} xl={4} xs={12}>

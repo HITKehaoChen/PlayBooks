@@ -18,11 +18,12 @@ export default class ShowList extends React.Component {
   render() {
 
     const bookArr = this.props.bookArr;
-    console.log('AuthorName: ', this.props.authorName);
-    const validRe = new RegExp('^$|\\s+', 'i');
-    // console.log('bookArr: ', bookArr);
-    // console.log('bookArr: ',Array.isArray(bookArr));
-    if (!this.props.isSearching && Array.isArray(bookArr) && bookArr.length > 0) {
+    console.log('[SHOWLIST]: AuthorName: ', this.props.authorName);
+    const validRe = new RegExp('^$|^\\s+$', 'i');
+    console.log('[SHOWLIST]: isSearching: ', this.props.isSearching);
+    console.log('[SHOWLIST]: bookArr: ', bookArr);
+    console.log('[SHOWLIST]: bookArr: ', Array.isArray(bookArr));
+    if (Array.isArray(bookArr) && bookArr.length > 0) {
       return (
         <List>
           {
@@ -56,7 +57,7 @@ export default class ShowList extends React.Component {
 
         </List>
       )
-    } else if (this.props.isSearching && !validRe.test(this.props.authorName)) {
+    } else if (this.props.isSearching) {
       return (
         <div>
           <List>

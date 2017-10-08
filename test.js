@@ -1,1 +1,1 @@
-console.log(new RegExp(/^$|\\s+/, 'i').test('  '));
+console.log(new RegExp('^$|^\\s+$', 'i').test('  '));
