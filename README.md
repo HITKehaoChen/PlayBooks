@@ -20,7 +20,7 @@ npm build
 
 - `npm start` for development
 
-- you can just visit the [Demo](viluntas.me/PlayBooks/) for this pro.(faster UX if you are in USA XD)
+- You can just visit the [Demo](viluntas.me/PlayBooks/) for this pro.(faster UX if you are in USA XD)
 
 
 # License
