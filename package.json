@@ -54,7 +54,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "deploynobuild": "gh-pages -d build"
   },
   "homepage": "http://myname.github.io/PlayBooks"
 }
