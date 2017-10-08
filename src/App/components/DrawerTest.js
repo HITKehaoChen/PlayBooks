@@ -177,7 +177,7 @@ class PersistentDrawer extends React.Component {
               </Typography>
 
 
-              <IconButton color="contrast" className={classes.searchButton}>
+              <IconButton color="contrast" aria-label="search" className={classes.searchButton}>
                 <SearchIcon/>
               </IconButton>
             </Toolbar>

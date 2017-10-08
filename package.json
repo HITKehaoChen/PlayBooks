@@ -55,7 +55,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deploynobuild": "gh-pages -d build"
+    "deploy-nomaps": "npm run delete-map-files && gh-pages -d build",
+    "delete-map-files": "rm build/static/*/*.map"
   },
   "homepage": "http://myname.github.io/PlayBooks"
 }
