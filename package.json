@@ -58,5 +58,6 @@
     "deploy-nomaps": "npm run delete-map-files && gh-pages -d build",
     "delete-map-files": "rm build/static/*/*.map"
   },
-  "homepage": "http://myname.github.io/PlayBooks"
+  "homepage": "http://myname.github.io/PlayBooks",
+  "license": "GPL-3.0"
 }

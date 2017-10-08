@@ -1,4 +1,28 @@
-# PlayBooks FE with React + Material-UI@v1
+# Play Books
 
-// if types so fast, then maybe system is searching ma, but you instantly typed mag, then 
-author name is mag but data is ma..,after sys finds out what mag is, then is the right data...
+A simple web app which will let you play with some books in a elegant way.
+
+It could be installed to the App Drawer of a Android phone!
+
+# Installing
+
+```bash
+npm i 
+```
+
+# Building
+
+
+```bash
+npm build
+```
+# Running
+
+- `npm start` for development
+
+- you can just visit the [Demo](viluntas.me/PlayBooks/) for this pro.(faster UX if you are in USA XD)
+
+
+# License
+
+Play Books is distributed under the GNU General Public License v3.0
