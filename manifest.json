@@ -3,7 +3,7 @@
   "name": "Playing with Books!",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "icons/favicon.ico",
       "sizes": "300x300",
       "type": "image/png"
     }
