@@ -73,6 +73,7 @@ class SimpleList extends React.Component {
     }, () => {
       this.handleClick(e);
       console.log('cb: ', this.state.authorName);
+
     });
 
     console.log('e.target.name: ', e.target.name);
@@ -195,7 +196,6 @@ class SimpleList extends React.Component {
         const end = new Date() - start;
 
 
-
         // setTimeout(() => {
         //
 
@@ -238,11 +238,14 @@ class SimpleList extends React.Component {
 
     // e.preventDefault();
     console.log('list state:', this.state);
-
-
-    this.getBooksByAuthorName(this.state.authorName);
-
-
+    // only when nor '' or '\\s+', fetch data
+    const EmptyRe = new RegExp('^$|\\s+', 'i');
+    if (!EmptyRe.test(this.state.authorName)) {
+      console.log('valid name: ',this.state.authorName);
+      this.getBooksByAuthorName(this.state.authorName);
+    }else {
+      console.log('invalid name: ',this.state.authorName);
+    }
     // let data = null;
     // Axios
     //   .get('http://localhost:8080/authors/' + this.state.authorName)
