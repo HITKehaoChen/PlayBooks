@@ -25,8 +25,8 @@ npm build
 
 # Todo
 
-- [] Syncing the res after editing the book info.
-- [] debounce func to optimize the UX 
+- [ ] Syncing the res after editing the book info.
+- [ ] debounce func to optimize the UX 
 
 # License
 
