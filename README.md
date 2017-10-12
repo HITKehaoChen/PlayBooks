@@ -21,7 +21,12 @@ npm build
 - `npm start` for development
 
 - You can just visit the [Demo](https://viluntas.me/PlayBooks/) for this pro.(faster UX if you are in USA XD)
+> You can input some author names like 'Mag', 'Test', 'Yuri' for testing.
 
+# Todo
+
+- [] Syncing the res after editing the book info.
+- [] debounce func to optimize the UX 
 
 # License
 

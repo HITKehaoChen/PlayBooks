@@ -21,7 +21,11 @@ res = (() => {
   let isEdge = userAgent.indexOf("Edge") > -1; //判断是否IE的Edge浏览器
   let isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
   let isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
-  let isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1 && !isEdge; //判断Chrome浏览器
+  let isQQ = userAgent.indexOf('QQ') > -1;
+  let isUC = userAgent.indexOf('UC') > -1;
+  let isBaidu = userAgent.toLocaleLowerCase().indexOf('baidu') > -1;
+  let isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1
+    && !isBaidu && !isEdge && !isQQ && !isUC; //判断Chrome浏览器
 
   if (isIE) {
     let reIE = new RegExp("MSIE (\\d+\\.\\d+);");
@@ -66,6 +70,13 @@ res = (() => {
   }
   if (isEdge) {
     return "Edge";
+  }
+
+  if (isQQ) {
+    return 'QQBrowser'
+  }
+  if (isUC) {
+    return 'UCBrowser'
   }
 })();//myBrowser() end
 
